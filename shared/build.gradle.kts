@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -44,6 +45,12 @@ android {
     defaultConfig {
         minSdkVersion(24)
         targetSdkVersion(29)
+    }
+}
+
+val commonMain by getting {
+    dependencies {
+        implementation("com.squareup.sqldelight:runtime:$sql_delight_version")
     }
 }
 
