@@ -18,7 +18,8 @@ class EntryPointActivity : AppCompatActivity(), InteractorProvider, Navigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_entry_point)
+        val binding = ActivityEntryPointBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)

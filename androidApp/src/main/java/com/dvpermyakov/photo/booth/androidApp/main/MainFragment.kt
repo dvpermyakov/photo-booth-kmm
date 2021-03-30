@@ -5,27 +5,30 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.dvpermyakov.photo.booth.androidApp.InteractorProvider
 import com.dvpermyakov.photo.booth.androidApp.Navigation
-import com.dvpermyakov.photo.booth.androidApp.R
+import com.dvpermyakov.photo.booth.androidApp.databinding.FragmentMainBinding
 import java.io.ByteArrayOutputStream
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val photoButtonView = view.findViewById<AppCompatButton>(R.id.photoButtonView)
-        photoButtonView.setOnClickListener {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        val binding = FragmentMainBinding.inflate(inflater)
+        binding.photoButtonView.setOnClickListener {
             dispatchTakePictureIntent()
         }
-        val watchPhotosView = view.findViewById<AppCompatButton>(R.id.watchPhotosView)
-        watchPhotosView.setOnClickListener {
+        binding.watchPhotosView.setOnClickListener {
             (activity as Navigation).navigateToImagePicker()
         }
+
+        return binding.root
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
