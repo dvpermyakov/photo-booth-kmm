@@ -34,7 +34,7 @@ class EntryPointActivity : AppCompatActivity(), InteractorProvider, Navigation {
         supportFragmentManager.commit {
             replace<ImagePickerFragment>(R.id.fragment_container_view)
             setReorderingAllowed(true)
-            addToBackStack("name") // name can be null
+            addToBackStack(null)
         }
     }
 }
