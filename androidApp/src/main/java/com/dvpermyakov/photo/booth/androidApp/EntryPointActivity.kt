@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.dvpermyakov.photo.booth.androidApp.databinding.ActivityEntryPointBinding
 import com.dvpermyakov.photo.booth.androidApp.imagePicker.ImagePickerFragment
 import com.dvpermyakov.photo.booth.androidApp.main.MainFragment
+import com.dvpermyakov.photo.booth.shared.database.DatabaseDriverFactory
 import com.dvpermyakov.photo.booth.shared.interactors.PhotoInteractor
+import com.dvpermyakov.photo.booth.shared.repository.DBRepository
 import com.dvpermyakov.photo.booth.shared.repository.FileRepository
 
 class EntryPointActivity : AppCompatActivity(), InteractorProvider, Navigation {
 
     private val interactor = PhotoInteractor(
-        fileRepository = FileRepository(this)
+        fileRepository = FileRepository(this),
+        dbRepository = DBRepository(DatabaseDriverFactory(this))
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

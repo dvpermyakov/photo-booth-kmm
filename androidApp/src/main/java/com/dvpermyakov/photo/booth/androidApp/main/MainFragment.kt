@@ -27,7 +27,6 @@ class MainFragment : Fragment() {
         binding.watchPhotosView.setOnClickListener {
             (activity as Navigation).navigateToImagePicker()
         }
-
         return binding.root
     }
 
@@ -37,7 +36,7 @@ class MainFragment : Fragment() {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             (activity as InteractorProvider)
                 .getPhotoInteractor()
-                .saveImage(IMAGE_NAME, toByteArray(imageBitmap))
+                .saveImage(System.currentTimeMillis().toString(), toByteArray(imageBitmap))
         }
     }
 
@@ -53,13 +52,12 @@ class MainFragment : Fragment() {
     private fun toByteArray(bmp: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bmp.compress(Bitmap.CompressFormat.WEBP, 100, stream)
-        val byteArray: ByteArray = stream.toByteArray()
+        val byteArray = stream.toByteArray()
         bmp.recycle()
         return byteArray
     }
 
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1243
-        private const val IMAGE_NAME = "imageName"
     }
 }

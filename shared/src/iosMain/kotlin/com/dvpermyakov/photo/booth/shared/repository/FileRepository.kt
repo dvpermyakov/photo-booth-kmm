@@ -4,7 +4,7 @@ actual class FileRepository {
     actual fun saveFile(name: String, byteArray: ByteArray) {
     }
 
-    actual fun getFiles(names: List<String>): List<ByteArray> {
-        return emptyList()
+    actual fun getFile(name: String): ByteArray {
+        return ByteArray(1)
     }
 }

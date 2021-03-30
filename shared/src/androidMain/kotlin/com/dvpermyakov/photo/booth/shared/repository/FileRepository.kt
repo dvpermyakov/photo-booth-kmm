@@ -11,11 +11,9 @@ actual class FileRepository(
         }
     }
 
-    actual fun getFiles(names: List<String>): List<ByteArray> {
-        return names.map { name ->
-            context.openFileInput(name).use { stream ->
-                stream.readBytes()
-            }
+    actual fun getFile(name: String): ByteArray {
+        return context.openFileInput(name).use { stream ->
+            stream.readBytes()
         }
     }
 
