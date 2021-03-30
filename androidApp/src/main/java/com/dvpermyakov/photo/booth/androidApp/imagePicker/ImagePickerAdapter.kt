@@ -15,6 +15,8 @@ class ImagePickerAdapter : RecyclerView.Adapter<ImagePickerAdapter.Holder>() {
             notifyDataSetChanged()
         }
 
+    var clickListener: ((image: PhotoInteractor.ImageWithBytes) -> Unit)? = null
+
     override fun getItemCount(): Int {
         return items.size
     }
@@ -27,9 +29,12 @@ class ImagePickerAdapter : RecyclerView.Adapter<ImagePickerAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.set(items[position])
+        holder.binding.root.setOnClickListener {
+            clickListener?.invoke(items[position])
+        }
     }
 
-    class Holder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+    class Holder(val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun set(image: PhotoInteractor.ImageWithBytes) {
             val bitmap = BitmapFactory.decodeByteArray(image.byteArray, 0, image.byteArray.size)
